@@ -1,11 +1,18 @@
 pipeline {
-    agent any
+    agent none
     stages {
-        stage('Build') {
+        stage('build') {
+            agent {
+                dockerfile{
+                    filename 'dockerfile.slave'
+                    dir 'build'
+                    additionalBuildArgs  '--build-arg version=1.0.2'
+                    args '-v /tmp:/tmp'
+                }
+            }
             steps {
                 echo 'I am working ... ^-^'
-                sh './gradlew build --no-daemon'
-                archiveArtifacts artifacts: 'dist/trainSchedule.zip'
+                sh './gradlew build'
             }
         }
     }
