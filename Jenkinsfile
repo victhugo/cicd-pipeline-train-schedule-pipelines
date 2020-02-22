@@ -5,7 +5,7 @@ pipeline {
             agent {
                 dockerfile{
                     filename 'dockerfile.slave'
-                    additionalBuildArgs  '-v /var/run/docker.sock:/var/run/docker.sock --build-arg version=1.0.2'
+                    additionalBuildArgs  '-v $(which docker):/usr/bin/docker --build-arg version=1.0.2'
                     args '-v /tmp:/tmp'
                 }
             }
