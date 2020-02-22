@@ -6,7 +6,7 @@ pipeline {
                 dockerfile{
                     filename 'dockerfile.slave'
                     additionalBuildArgs  '--build-arg version=1.0.2'
-                    args '-v /tmp:/tmp'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock'
                 }
             }
             steps {
